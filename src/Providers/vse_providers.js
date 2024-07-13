@@ -2,7 +2,6 @@
 export class OpenAIProvider {
   constructor() {
     this.provider = 'openai';
-    this.apiKey = localStorage.getItem('OPENAI_API_KEY') || 'YOUR_API_KEY'; 
   }
 
   async chatCompletion(messages, options) {
@@ -12,7 +11,7 @@ export class OpenAIProvider {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.apiKey}`,
+        'Authorization': `Bearer YOUR_OPENAI_API_KEY`, 
       },
       body: JSON.stringify({
         model,
@@ -52,7 +51,6 @@ export class OpenAIProvider {
 export class GoogleProvider {
   constructor() {
     this.provider = 'google';
-    this.apiKey = localStorage.getItem('GOOGLE_API_KEY') || 'YOUR_API_KEY';
   }
 
   async chatCompletion(messages, options) {
@@ -101,7 +99,6 @@ export class GoogleProvider {
 export class AnthropicProvider {
   constructor() {
     this.provider = 'anthropic';
-    this.apiKey = localStorage.getItem('ANTHROPIC_API_KEY') || 'YOUR_API_KEY';
   }
 
   async chatCompletion(messages, options) {
@@ -111,7 +108,7 @@ export class AnthropicProvider {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.apiKey}`,
+        'Authorization': `Bearer YOUR_ANTHROPIC_API_KEY`, 
       },
       body: JSON.stringify({
         model,
@@ -151,7 +148,6 @@ export class AnthropicProvider {
 export class AryahcrProvider {
   constructor() {
     this.provider = 'aryahcr';
-    this.apiKey = localStorage.getItem('ARYAHCR_API_KEY') || 'YOUR_API_KEY';
   }
 
   async chatCompletion(messages, options) {
@@ -161,7 +157,7 @@ export class AryahcrProvider {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.apiKey}`,
+        'Authorization': `Bearer YOUR_ARYAHCR_API_KEY`, 
       },
       body: JSON.stringify({
         model,
@@ -201,7 +197,6 @@ export class AryahcrProvider {
 export class BlackboxProvider {
   constructor() {
     this.provider = 'blackbox';
-    this.apiKey = localStorage.getItem('BLACKBOX_API_KEY') || 'YOUR_API_KEY';
   }
 
   async chatCompletion(messages, options) {
@@ -211,7 +206,7 @@ export class BlackboxProvider {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.apiKey}`,
+        'Authorization': `Bearer YOUR_BLACKBOX_API_KEY`, 
       },
       body: JSON.stringify({
         model,
@@ -251,7 +246,6 @@ export class BlackboxProvider {
 export class NextwayProvider {
   constructor() {
     this.provider = 'nextway';
-    this.apiKey = localStorage.getItem('NEXTWAY_API_KEY') || 'YOUR_API_KEY';
   }
 
   async chatCompletion(messages, options) {
@@ -261,7 +255,7 @@ export class NextwayProvider {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.apiKey}`,
+        'Authorization': `Bearer YOUR_NEXTWAY_API_KEY`, 
       },
       body: JSON.stringify({
         model,
@@ -301,7 +295,6 @@ export class NextwayProvider {
 export class ChromeProvider {
   constructor() {
     this.provider = 'chrome';
-    this.apiKey = localStorage.getItem('CHROME_API_KEY') || 'YOUR_API_KEY';
   }
 
   async chatCompletion(messages, options) {
@@ -311,7 +304,7 @@ export class ChromeProvider {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.apiKey}`,
+        'Authorization': `Bearer YOUR_CHROME_API_KEY`, 
       },
       body: JSON.stringify({
         model,
@@ -351,7 +344,6 @@ export class ChromeProvider {
 export class OllamaProvider {
   constructor() {
     this.provider = 'ollama';
-    this.apiKey = localStorage.getItem('OLLAMA_API_KEY') || 'YOUR_API_KEY';
   }
 
   async chatCompletion(messages, options) {
@@ -361,7 +353,7 @@ export class OllamaProvider {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.apiKey}`,
+        'Authorization': `Bearer YOUR_OLLAMA_API_KEY`, 
       },
       body: JSON.stringify({
         model,
@@ -401,7 +393,6 @@ export class OllamaProvider {
 export class AlibabaProvider {
   constructor() {
     this.provider = 'alibaba';
-    this.apiKey = localStorage.getItem('ALIBABA_API_KEY') || 'YOUR_API_KEY';
   }
 
   async chatCompletion(messages, options) {
@@ -411,7 +402,7 @@ export class AlibabaProvider {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.apiKey}`,
+        'Authorization': `Bearer YOUR_ALIBABA_API_KEY`, 
       },
       body: JSON.stringify({
         model,
@@ -451,7 +442,6 @@ export class AlibabaProvider {
 export class ChatBotRuProvider {
   constructor() {
     this.provider = 'chatbotru';
-    this.apiKey = localStorage.getItem('CHATBOTRU_API_KEY') || 'YOUR_API_KEY';
   }
 
   async chatCompletion(messages, options) {
@@ -461,7 +451,7 @@ export class ChatBotRuProvider {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.apiKey}`,
+        'Authorization': `Bearer YOUR_CHATBOTRU_API_KEY`, 
       },
       body: JSON.stringify({
         model,
@@ -501,7 +491,6 @@ export class ChatBotRuProvider {
 export class StableDiffusionProvider {
   constructor() {
     this.provider = 'stablediffusion';
-    this.apiKey = localStorage.getItem('STABLEDIFFUSION_API_KEY') || 'YOUR_API_KEY';
   }
 
   async imageGeneration(prompt, options) {
@@ -511,7 +500,7 @@ export class StableDiffusionProvider {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.apiKey}`,
+        'Authorization': `Bearer YOUR_STABLEDIFFUSION_API_KEY`, 
       },
       body: JSON.stringify({
         model,
@@ -536,7 +525,6 @@ export class StableDiffusionProvider {
 export class Dalle2Provider {
   constructor() {
     this.provider = 'dalle2';
-    this.apiKey = localStorage.getItem('DALLE2_API_KEY') || 'YOUR_API_KEY';
   }
 
   async imageGeneration(prompt, options) {
@@ -546,7 +534,7 @@ export class Dalle2Provider {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.apiKey}`,
+        'Authorization': `Bearer YOUR_DALLE2_API_KEY`, 
       },
       body: JSON.stringify({
         model,
