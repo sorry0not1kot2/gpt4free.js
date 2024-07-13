@@ -34,7 +34,34 @@ sendButton.addEventListener("click", async () => {
     } else if (provider === 'anthropic') {
       const AnthropicProvider = require('./src/providers/anthropic.js'); 
       providerInstance = new AnthropicProvider(); 
-    } // ... (аналогично для других провайдеров)
+    } else if (provider === 'aryahcr') {
+      const AryahcrProvider = require('./src/providers/aryahcr.js'); 
+      providerInstance = new AryahcrProvider(); 
+    } else if (provider === 'blackbox') {
+      const BlackboxProvider = require('./src/providers/blackbox.js'); 
+      providerInstance = new BlackboxProvider(); 
+    } else if (provider === 'nextway') {
+      const NextwayProvider = require('./src/providers/nextway.js'); 
+      providerInstance = new NextwayProvider(); 
+    } else if (provider === 'chrome') {
+      const ChromeProvider = require('./src/providers/chrome.js'); 
+      providerInstance = new ChromeProvider(); 
+    } else if (provider === 'ollama') {
+      const OllamaProvider = require('./src/providers/ollama.js'); 
+      providerInstance = new OllamaProvider(); 
+    } else if (provider === 'alibaba') {
+      const AlibabaProvider = require('./src/providers/alibaba.js'); 
+      providerInstance = new AlibabaProvider(); 
+    } else if (provider === 'chatbotru') {
+      const ChatBotRuProvider = require('./src/providers/chatbotru.js'); 
+      providerInstance = new ChatBotRuProvider(); 
+    } else if (provider === 'stablediffusion') {
+      const StableDiffusionProvider = require('./src/providers/stablediffusion.js'); 
+      providerInstance = new StableDiffusionProvider(); 
+    } else if (provider === 'dalle2') {
+      const Dalle2Provider = require('./src/providers/dalle2.js'); 
+      providerInstance = new Dalle2Provider(); 
+    } 
 
     const response = await providerInstance.chatCompletion(messages, options);
 
@@ -54,4 +81,4 @@ function addMessageToChat(emoji, message) {
   messageElement.innerHTML = `<span class="text-2xl mr-2">${emoji}</span><div class="bg-white p-2 rounded-md shadow-sm">${message}</div>`;
   chatContainer.appendChild(messageElement);
   chatContainer.scrollTop = chatContainer.scrollHeight;
-}
+  }
