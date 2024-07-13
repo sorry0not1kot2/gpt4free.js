@@ -1,137 +1,45 @@
-const providerTypeSelect = document.getElementById('provider-type-select');
-const providerSelect = document.getElementById('provider-select');
-const modelSelect = document.getElementById('model-select');
-const chatbox = document.getElementById('chatbox');
-const userInput = document.getElementById('user-input');
-const sendButton = document.getElementById('send-button');
+const chatContainer = document.getElementById("chat-container");
+const sendButton = document.getElementById("send-button");
+const userInput = document.getElementById("user-input");
+const providerSelect = document.getElementById("provider");
+const modelSelect = document.getElementById("model");
+const temperatureInput = document.getElementById("temperature");
+const streamCheckbox = document.getElementById("stream");
 
-let selectedProviderType = null;
-let selectedProvider = null;
-let selectedModel = null;
-let currentModel = null;
+sendButton.addEventListener("click", async () => {
+  const userInputValue = userInput.value;
+  const provider = providerSelect.value;
+  const model = modelSelect.value;
+  const stream = streamCheckbox.checked;
+  const temperature = parseFloat(temperatureInput.value);
 
-// Загрузка списка провайдеров
-const providers = {
-  'ChatCompletion': [
-    { name: 'ChatGPT', displayName: 'ChatGPT' },
-    // ... (другие провайдеры для чата) ...
-  ],
-  'ImageGeneration': [
-    { name: 'StableDiffusion', displayName: 'Stable Diffusion' },
-    // ... (другие провайдеры для генерации изображений) ...
-  ]
-};
+  const options = {
+    provider,
+    model,
+    stream,
+    temperature,
+  };
 
-// Заполнение выпадающего списка типов провайдеров
-for (const providerType in providers) {
-  const option = document.createElement('option');
-  option.value = providerType;
-  option.text = providerType;
-  providerTypeSelect.add(option);
-}
+  const messages = [{ role: "user", content: userInputValue }];
 
-// Загружаем провайдеров по умолчанию (например, ChatCompletion)
-loadProviders('ChatCompletion');
+  try {
+    const providerInstance = GPT4js.createProvider(provider);
+    const response = await providerInstance.chatCompletion(messages, options);
 
-// Загрузка списка провайдеров для выбранного типа
-function loadProviders(providerType) {
-  // Очистка providerSelect
-  providerSelect.innerHTML = '<option value="">Select Provider</option>';
-  providerSelect.disabled = true;
+    addMessageToChat("👨‍💻", userInputValue);
+    addMessageToChat("🤖", response);
 
-  if (providerType && providers[providerType]) { 
-    providers[providerType].forEach(provider => {
-      const option = document.createElement('option');
-      option.value = provider.name;
-      option.text = provider.displayName;
-      providerSelect.add(option);
-    });
-    providerSelect.disabled = false;
-  } else { 
-    providerSelect.innerHTML = '<option value="">Select Provider</option>';
-    providerSelect.disabled = true;
+    userInput.value = "";
+  } catch (error) {
+    console.error("Error:", error);
+    addMessageToChat("🤖", `Ошибка: ${error.message}`);
   }
-}
-
-// Загрузка списка моделей для выбранного провайдера
-function loadModels(provider) {
-  modelSelect.innerHTML = '<option value="">Select Model</option>';
-  modelSelect.disabled = true;
-
-  if (provider) {
-    fetch(`./providers/${provider.name}/models.json`)
-      .then(response => response.json())
-      .then(models => {
-        models.forEach(model => {
-          const option = document.createElement('option');
-          option.value = model.name;
-          option.text = model.displayName;
-          modelSelect.add(option);
-        });
-        modelSelect.disabled = false;
-      })
-      .catch(error => {
-        console.error('Error loading models:', error);
-        chatbox.innerHTML += `<p>Error loading models: ${error}</p>`;
-      });
-  }
-}
-
-// Инициализация выбранной модели
-async function initializeModel(providerName, modelName) {
-  if (modelName) {
-    try {
-      const provider = await import(`./providers/${providerName}/index.js`);
-      currentModel = new provider.default(modelName);
-      userInput.disabled = false;
-      sendButton.disabled = false;
-    } catch (error) {
-      console.error('Error initializing model:', error);
-      chatbox.innerHTML += `<p>Error initializing model: ${error}</p>`;
-    }
-  }
-}
-
-// Отправка сообщения выбранной модели
-async function sendMessage(message) {
-  if (currentModel) {
-    try {
-      const response = await currentModel.generate(message);
-      chatbox.innerHTML += `<p>You: ${message}</p>`;
-      chatbox.innerHTML += `<p>GPT-4: ${response}</p>`;
-    } catch (error) {
-      console.error('Error sending message:', error);
-      chatbox.innerHTML += `<p>Error: ${error.message}</p>`;
-    }
-  }
-}
-
-// Обработчик события для выбора типа провайдера
-providerTypeSelect.addEventListener('change', () => {
-  selectedProviderType = providerTypeSelect.value;
-
-  // Загрузка провайдеров для выбранного типа
-  loadProviders(selectedProviderType);
 });
 
-// Обработчик события для выбора провайдера
-providerSelect.addEventListener('change', () => {
-  selectedProvider = providers[selectedProviderType].find(p => p.name === providerSelect.value);
-
-  // Загрузка моделей для выбранного провайдера
-  loadModels(selectedProvider);
-});
-
-// Обработчик события для выбора модели
-modelSelect.addEventListener('change', () => {
-  selectedModel = modelSelect.value;
-  initializeModel(selectedProvider.name, selectedModel);
-});
-
-// Обработчик события для отправки сообщения
-sendButton.addEventListener('click', async () => { // Добавлено!
-  const message = userInput.value;
-  userInput.value = '';
-
-  sendMessage(message);
-});
+function addMessageToChat(emoji, message) {
+  const messageElement = document.createElement("div");
+  messageElement.classList.add("flex", "items-center", "mb-2");
+  messageElement.innerHTML = `<span class="text-2xl mr-2">${emoji}</span><div class="bg-white p-2 rounded-md shadow-sm">${message}</div>`;
+  chatContainer.appendChild(messageElement);
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+}
