@@ -26,41 +26,41 @@ sendButton.addEventListener("click", async () => {
     // Импорт нужного провайдера
     let providerInstance;
     if (provider === 'openai') {
-      const OpenAIProvider = require('./src/providers/openai.js'); 
-      providerInstance = new OpenAIProvider();
+      const OpenAIProvider = await import('./src/providers/openai.js'); 
+      providerInstance = new OpenAIProvider.default();
     } else if (provider === 'google') {
-      const GoogleProvider = require('./src/providers/google.js'); 
-      providerInstance = new GoogleProvider(); 
+      const GoogleProvider = await import('./src/providers/google.js'); 
+      providerInstance = new GoogleProvider.default(); 
     } else if (provider === 'anthropic') {
-      const AnthropicProvider = require('./src/providers/anthropic.js'); 
-      providerInstance = new AnthropicProvider(); 
+      const AnthropicProvider = await import('./src/providers/anthropic.js'); 
+      providerInstance = new AnthropicProvider.default(); 
     } else if (provider === 'aryahcr') {
-      const AryahcrProvider = require('./src/providers/aryahcr.js'); 
-      providerInstance = new AryahcrProvider(); 
+      const AryahcrProvider = await import('./src/providers/aryahcr.js'); 
+      providerInstance = new AryahcrProvider.default(); 
     } else if (provider === 'blackbox') {
-      const BlackboxProvider = require('./src/providers/blackbox.js'); 
-      providerInstance = new BlackboxProvider(); 
+      const BlackboxProvider = await import('./src/providers/blackbox.js'); 
+      providerInstance = new BlackboxProvider.default(); 
     } else if (provider === 'nextway') {
-      const NextwayProvider = require('./src/providers/nextway.js'); 
-      providerInstance = new NextwayProvider(); 
+      const NextwayProvider = await import('./src/providers/nextway.js'); 
+      providerInstance = new NextwayProvider.default(); 
     } else if (provider === 'chrome') {
-      const ChromeProvider = require('./src/providers/chrome.js'); 
-      providerInstance = new ChromeProvider(); 
+      const ChromeProvider = await import('./src/providers/chrome.js'); 
+      providerInstance = new ChromeProvider.default(); 
     } else if (provider === 'ollama') {
-      const OllamaProvider = require('./src/providers/ollama.js'); 
-      providerInstance = new OllamaProvider(); 
+      const OllamaProvider = await import('./src/providers/ollama.js'); 
+      providerInstance = new OllamaProvider.default(); 
     } else if (provider === 'alibaba') {
-      const AlibabaProvider = require('./src/providers/alibaba.js'); 
-      providerInstance = new AlibabaProvider(); 
+      const AlibabaProvider = await import('./src/providers/alibaba.js'); 
+      providerInstance = new AlibabaProvider.default(); 
     } else if (provider === 'chatbotru') {
-      const ChatBotRuProvider = require('./src/providers/chatbotru.js'); 
-      providerInstance = new ChatBotRuProvider(); 
+      const ChatBotRuProvider = await import('./src/providers/chatbotru.js'); 
+      providerInstance = new ChatBotRuProvider.default(); 
     } else if (provider === 'stablediffusion') {
-      const StableDiffusionProvider = require('./src/providers/stablediffusion.js'); 
-      providerInstance = new StableDiffusionProvider(); 
+      const StableDiffusionProvider = await import('./src/providers/stablediffusion.js'); 
+      providerInstance = new StableDiffusionProvider.default(); 
     } else if (provider === 'dalle2') {
-      const Dalle2Provider = require('./src/providers/dalle2.js'); 
-      providerInstance = new Dalle2Provider(); 
+      const Dalle2Provider = await import('./src/providers/dalle2.js'); 
+      providerInstance = new Dalle2Provider.default(); 
     } 
 
     const response = await providerInstance.chatCompletion(messages, options);
