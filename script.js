@@ -13,10 +13,12 @@ let currentModel = null;
 // Загрузка списка провайдеров
 const providers = {
   'ChatCompletion': [
-    // ... (список провайдеров для чата) ...
+    { name: 'ChatGPT', displayName: 'ChatGPT' },
+    // ... (другие провайдеры для чата) ...
   ],
   'ImageGeneration': [
-    // ... (список провайдеров для генерации изображений) ...
+    { name: 'StableDiffusion', displayName: 'Stable Diffusion' },
+    // ... (другие провайдеры для генерации изображений) ...
   ]
 };
 
@@ -41,6 +43,9 @@ function loadProviders(providerType) {
       providerSelect.add(option);
     });
     providerSelect.disabled = false;
+  } else { 
+    providerSelect.innerHTML = '<option value="">Select Provider</option>';
+    providerSelect.disabled = true;
   }
 }
 
