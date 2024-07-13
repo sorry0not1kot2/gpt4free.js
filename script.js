@@ -25,41 +25,31 @@ sendButton.addEventListener("click", async () => {
   try {
     // Импорт нужного провайдера
     let providerInstance;
+    const { OpenAIProvider, GoogleProvider, AnthropicProvider, AryahcrProvider, BlackboxProvider, NextwayProvider, ChromeProvider, OllamaProvider, AlibabaProvider, ChatBotRuProvider, StableDiffusionProvider, Dalle2Provider } = await import('./src/Providers/vse_providers.js'); 
+
     if (provider === 'openai') {
-      const { default: OpenAIProvider } = await import('./src/providers/openai.js'); 
       providerInstance = new OpenAIProvider();
     } else if (provider === 'google') {
-      const { default: GoogleProvider } = await import('./src/providers/google.js'); 
       providerInstance = new GoogleProvider(); 
     } else if (provider === 'anthropic') {
-      const { default: AnthropicProvider } = await import('./src/providers/anthropic.js'); 
       providerInstance = new AnthropicProvider(); 
     } else if (provider === 'aryahcr') {
-      const { default: AryahcrProvider } = await import('./src/providers/aryahcr.js'); 
       providerInstance = new AryahcrProvider(); 
     } else if (provider === 'blackbox') {
-      const { default: BlackboxProvider } = await import('./src/providers/blackbox.js'); 
       providerInstance = new BlackboxProvider(); 
     } else if (provider === 'nextway') {
-      const { default: NextwayProvider } = await import('./src/providers/nextway.js'); 
       providerInstance = new NextwayProvider(); 
     } else if (provider === 'chrome') {
-      const { default: ChromeProvider } = await import('./src/providers/chrome.js'); 
       providerInstance = new ChromeProvider(); 
     } else if (provider === 'ollama') {
-      const { default: OllamaProvider } = await import('./src/providers/ollama.js'); 
       providerInstance = new OllamaProvider(); 
     } else if (provider === 'alibaba') {
-      const { default: AlibabaProvider } = await import('./src/providers/alibaba.js'); 
       providerInstance = new AlibabaProvider(); 
     } else if (provider === 'chatbotru') {
-      const { default: ChatBotRuProvider } = await import('./src/providers/chatbotru.js'); 
       providerInstance = new ChatBotRuProvider(); 
     } else if (provider === 'stablediffusion') {
-      const { default: StableDiffusionProvider } = await import('./src/providers/stablediffusion.js'); 
       providerInstance = new StableDiffusionProvider(); 
     } else if (provider === 'dalle2') {
-      const { default: Dalle2Provider } = await import('./src/providers/dalle2.js'); 
       providerInstance = new Dalle2Provider(); 
     } 
 
