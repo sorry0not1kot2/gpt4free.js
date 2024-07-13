@@ -23,6 +23,7 @@ sendButton.addEventListener("click", async () => {
   const messages = [{ role: "user", content: userInputValue }];
 
   try {
+    // Используем GPT4js из gpt4free.js
     const providerInstance = GPT4js.createProvider(provider);
     const response = await providerInstance.chatCompletion(messages, options);
 
