@@ -5,10 +5,18 @@
 </head>
 <body>
   <h1>Chat with GPT-4</h1>
-  <div id="chatbox">
-    </div>
-  <input type="text" id="user-input" placeholder="Type your message...">
-  <button id="send-button">Send</button>
+
+  <select id="provider-select">
+    <option value="">Select Provider</option>
+  </select>
+
+  <select id="model-select" disabled>
+    <option value="">Select Model</option>
+  </select>
+
+  <div id="chatbox"></div>
+  <input type="text" id="user-input" placeholder="Type your message..." disabled>
+  <button id="send-button" disabled>Send</button>
 
   <script src="script.js"></script>
 </body>
