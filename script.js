@@ -6,18 +6,20 @@ const sendButton = document.getElementById('send-button');
 
 let selectedProvider = null;
 let selectedModel = null;
+let currentModel = null;
 
 // Загрузка списка провайдеров
-fetch('./providers.json')
-  .then(response => response.json())
-  .then(providers => {
-    providers.forEach(provider => {
-      const option = document.createElement('option');
-      option.value = provider.name;
-      option.text = provider.displayName;
-      providerSelect.add(option);
-    });
-  });
+const providers = [
+  { name: 'ChatCompletion', displayName: 'Chat Completion' },
+  { name: 'ImageGeneration', displayName: 'Image Generation' }
+];
+
+providers.forEach(provider => {
+  const option = document.createElement('option');
+  option.value = provider.name;
+  option.text = provider.displayName;
+  providerSelect.add(option);
+});
 
 providerSelect.addEventListener('change', () => {
   const selectedProviderName = providerSelect.value;
@@ -39,45 +41,46 @@ providerSelect.addEventListener('change', () => {
           modelSelect.add(option);
         });
         modelSelect.disabled = false;
+      })
+      .catch(error => {
+        console.error('Error loading models:', error);
+        chatbox.innerHTML += `<p>Error loading models: ${error}</p>`;
       });
   }
 });
 
 modelSelect.addEventListener('change', () => {
   selectedModel = modelSelect.value;
-  // ... (код для инициализации выбранной модели) ...
+  initializeModel();
 });
 
 sendButton.addEventListener('click', async () => {
   const message = userInput.value;
   userInput.value = '';
 
-  // ... (код для отправки сообщения выбранной модели) ...
+  sendMessage(message);
 });
 
-// ... (код для инициализации выбранной модели) ...
-
-// Пример инициализации модели:
+// Инициализация выбранной модели
 async function initializeModel() {
   if (selectedModel) {
     try {
-      const provider = require(`./providers/${selectedProvider.name}/index.js`);
-      const model = new provider.default(selectedModel);
-      // ... (код для настройки и использования модели) ...
+      const provider = await import(`./providers/${selectedProvider.name}/index.js`);
+      currentModel = new provider.default(selectedModel);
+      userInput.disabled = false;
+      sendButton.disabled = false;
     } catch (error) {
       console.error('Error initializing model:', error);
-      // ... (обработка ошибки) ...
+      chatbox.innerHTML += `<p>Error initializing model: ${error}</p>`;
     }
   }
 }
 
-// ... (код для отправки сообщения выбранной модели) ...
-
-// Пример отправки сообщения:
+// Отправка сообщения выбранной модели
 async function sendMessage(message) {
-  if (selectedModel) {
+  if (currentModel) {
     try {
-      const response = await selectedModel.generate(message);
+      const response = await currentModel.generate(message);
       chatbox.innerHTML += `<p>You: ${message}</p>`;
       chatbox.innerHTML += `<p>GPT-4: ${response}</p>`;
     } catch (error) {
