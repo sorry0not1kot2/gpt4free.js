@@ -30,12 +30,15 @@ for (const providerType in providers) {
   providerTypeSelect.add(option);
 }
 
+// Загружаем провайдеров по умолчанию (например, ChatCompletion)
+loadProviders('ChatCompletion');
+
 // Загрузка списка провайдеров для выбранного типа
 function loadProviders(providerType) {
   providerSelect.innerHTML = '<option value="">Select Provider</option>';
   providerSelect.disabled = true;
 
-  if (providerType) {
+  if (providerType && providers[providerType]) { 
     providers[providerType].forEach(provider => {
       const option = document.createElement('option');
       option.value = provider.name;
