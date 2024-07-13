@@ -129,7 +129,7 @@ modelSelect.addEventListener('change', () => {
 });
 
 // Обработчик события для отправки сообщения
-sendButton.addEventListener('click', async () => {
+sendButton.addEventListener('click', async () => { // Добавлено!
   const message = userInput.value;
   userInput.value = '';
 
