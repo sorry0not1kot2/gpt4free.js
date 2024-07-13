@@ -35,6 +35,7 @@ loadProviders('ChatCompletion');
 
 // Загрузка списка провайдеров для выбранного типа
 function loadProviders(providerType) {
+  // Очистка providerSelect
   providerSelect.innerHTML = '<option value="">Select Provider</option>';
   providerSelect.disabled = true;
 
