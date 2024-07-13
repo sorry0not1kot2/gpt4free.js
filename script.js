@@ -23,8 +23,19 @@ sendButton.addEventListener("click", async () => {
   const messages = [{ role: "user", content: userInputValue }];
 
   try {
-    // Используем GPT4js из gpt4free.js
-    const providerInstance = GPT4js.createProvider(provider);
+    // Импорт нужного провайдера
+    let providerInstance;
+    if (provider === 'openai') {
+      const OpenAIProvider = require('./src/providers/openai.js'); 
+      providerInstance = new OpenAIProvider();
+    } else if (provider === 'google') {
+      const GoogleProvider = require('./src/providers/google.js'); 
+      providerInstance = new GoogleProvider(); 
+    } else if (provider === 'anthropic') {
+      const AnthropicProvider = require('./src/providers/anthropic.js'); 
+      providerInstance = new AnthropicProvider(); 
+    } // ... (аналогично для других провайдеров)
+
     const response = await providerInstance.chatCompletion(messages, options);
 
     addMessageToChat("👨‍💻", userInputValue);
